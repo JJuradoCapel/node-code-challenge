@@ -19,11 +19,11 @@ jobs:
     - name: Use Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    - run: npm test
-    - run: npm package
+        node-version: node-14
+        cache: 'yarn'
+    - run: yarn install --frozen-lockfile
+    - run: yarn test
+    - run: yarn run package
     - name: Automatic Releases
       # You may pin to the exact commit or the version.
       # uses: marvinpinto/action-automatic-releases@919008cf3f741b179569b7a6fb4d8860689ab7f0
