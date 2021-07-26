@@ -4,7 +4,7 @@
   "main": "index.ts",
   "scripts": {
     "start": "ts-node ./src/index.ts",
-    "package": "tsc && pkg .",
+    "package": "rimraf dist/ && rimraf compiled/ && tsc && pkg .",
     "test": "mocha -r ts-node/register test/*/**.test.ts",
     "lint": "eslint ."
   },
