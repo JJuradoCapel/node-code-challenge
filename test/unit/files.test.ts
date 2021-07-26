@@ -23,13 +23,18 @@ describe('#parseMapDimensions', () => {
 
 describe('#parseRobot', () => {
   context('with a string', () => {
+    const bigMap = { x: 50, y: 50 };
+    const smallMap = { x: 2, y: 2 };
     it('should raise an exception if the string is empty', () => {
-      expect(() => parseRobot('', 0)).to.throw();
+      expect(() => parseRobot('', 0, bigMap)).to.throw();
     });
     it('should raise an exception with an invalid string', () => {
-      expect(() => parseRobot('A A', 0)).to.throw();
+      expect(() => parseRobot('A A', 0, bigMap)).to.throw();
     });
-    const result = parseRobot('5 10 E', 0);
+    it('should raise an exception with an initial position outside the map', () => {
+      expect(() => parseRobot('5 5 E', 0, smallMap)).to.throw();
+    });
+    const result = parseRobot('5 10 E', 0, bigMap);
     it('should return a Robot instance', () => {
       expect(result).to.be.instanceOf(Robot);
     });

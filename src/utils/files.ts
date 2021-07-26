@@ -8,20 +8,21 @@ import Map from '../classes/Map';
 import defaultActions from './actions';
 import { Actions, actionsInvertedMap, directionInvertedMap } from '../../types';
 import { checkCoordinates } from './directions';
-import { MAX_INSTRUCTIONS } from '../constants';
+import { MAX_COORDINATE_VALUE, MAX_INSTRUCTIONS } from '../constants';
 
 const ParseError = (line: number, msg: string) => new Error(`Parse error in line ${line}: ${msg}`);
+const mapLimits = { x: MAX_COORDINATE_VALUE, y: MAX_COORDINATE_VALUE };
 
 export const parseMapDimensions = (line: string) => {
   const values = line.split(' ');
   if (values.length !== 2) throw ParseError(0, 'Wrong map dimensions definition');
 
   const mapDimensions = { x: parseInt(values[0], 10), y: parseInt(values[1], 10) };
-  if (!checkCoordinates(mapDimensions)) throw ParseError(0, 'Invalid dimensions. Should be between 0 and 50');
+  if (!checkCoordinates(mapDimensions, mapLimits)) throw ParseError(0, 'Invalid dimensions. Should be between 0 and 50');
   return mapDimensions;
 };
 
-export const parseRobot = (line: string, lineNumber: number) => {
+export const parseRobot = (line: string, lineNumber: number, mapDimensions: { x: number, y: number }) => {
   const values = line.split(' ');
   if (values.length !== 3) throw ParseError(lineNumber, 'Wrong robot definition');
 
@@ -30,7 +31,7 @@ export const parseRobot = (line: string, lineNumber: number) => {
   const initialDirectionParsed = directionInvertedMap[initialDirection as keyof typeof directionInvertedMap];
 
   const initialPosition = { x: parseInt(values[0], 10), y: parseInt(values[1], 10) };
-  if (!checkCoordinates(initialPosition)) throw ParseError(lineNumber, 'Invalid initial position. Should be between 0 and 50');
+  if (!checkCoordinates(initialPosition, mapDimensions)) throw ParseError(lineNumber, 'Invalid initial position. Should be between 0 and 50');
   return new Robot(initialPosition, initialDirectionParsed, defaultActions);
 };
 
@@ -60,7 +61,7 @@ export const parseFile = async (filename: string): Promise<[Map<Actions>, Robot<
       mapDimensions = parseMapDimensions(line);
     } else if (lineNumber % 2 !== 0) {
       // If the line number is odd, we are at a robot initial definition
-      robots.push(parseRobot(line, lineNumber));
+      robots.push(parseRobot(line, lineNumber, mapDimensions));
     } else {
       // If the line number is even, we are at a robot actions definition
       actionsList.push(parseActions(line, lineNumber));
