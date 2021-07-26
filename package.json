@@ -10,7 +10,11 @@
   },
   "bin": "dist/src/index.js",
   "pkg": {
-    "targets": ["node14-win-x64", "node14-linux-x64", "node14-macos-x64"],
+    "targets": [
+      "node14-win-x64",
+      "node14-linux-x64",
+      "node14-macos-x64"
+    ],
     "scripts": "dist/**/*.js",
     "outputPath": "compiled/"
   },
@@ -44,6 +48,7 @@
   },
   "dependencies": {
     "@types/minimist": "^1.2.2",
+    "chalk": "^4.1.1",
     "minimist": "^1.2.5"
   }
 }
