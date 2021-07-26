@@ -1,5 +1,10 @@
 import { Direction } from '../../types';
+import { MAX_COORDINATE_VALUE } from '../constants';
 
+export const checkCoordinates = (coords: { x: number; y: number }) => (coords.x <= MAX_COORDINATE_VALUE
+  && coords.x >= 0
+  && coords.y <= MAX_COORDINATE_VALUE
+  && coords.y >= 0);
 export const directionArray = [Direction.N, Direction.W, Direction.S, Direction.E];
 const directionLength = directionArray.length;
 export const applyCircularTurn = (initialDirection: Direction, val: number): Direction => {

@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { Direction } from '../../types';
-import { directionArray, applyCircularTurn } from '../../src/utils';
+import { directionArray, applyCircularTurn } from '../../src/utils/directions';
 
 describe('#applyCircularTurn', () => {
   context('with 0 value', () => {

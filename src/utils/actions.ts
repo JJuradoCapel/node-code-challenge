@@ -1,6 +1,6 @@
-import Action from './classes/Action';
-import { Actions, Direction, Position } from '../types';
-import { applyCircularTurn } from './utils';
+import Action from '../classes/Action';
+import { Actions, Direction, Position } from '../../types';
+import { applyCircularTurn } from './directions';
 
 const getNextDirectionLeftAction = (currentDirection: Direction) => applyCircularTurn(currentDirection, 1);
 const getNextPositionLeftAction = (currentPosition : Position) => currentPosition;

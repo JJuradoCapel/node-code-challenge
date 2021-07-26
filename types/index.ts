@@ -6,8 +6,21 @@ export enum Direction {
   W = 'W',
 }
 
+export const directionInvertedMap = {
+  N: Direction.N,
+  E: Direction.E,
+  S: Direction.S,
+  W: Direction.W,
+};
+
 export enum Actions {
   L = 'L',
   R = 'R',
   F = 'F',
 }
+
+export const actionsInvertedMap = {
+  L: Actions.L,
+  R: Actions.R,
+  F: Actions.F,
+};

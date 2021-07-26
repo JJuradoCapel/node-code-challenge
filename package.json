@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
-    "start": "ts-node index.ts",
+    "start": "ts-node ./src/index.ts",
     "test": "mocha -r ts-node/register test/*/**.test.ts",
     "lint": "eslint ."
   },
@@ -32,5 +32,9 @@
     "app/**/*.{js,jsx,ts,tsx}": [
       "eslint"
     ]
+  },
+  "dependencies": {
+    "@types/minimist": "^1.2.2",
+    "minimist": "^1.2.5"
   }
 }
