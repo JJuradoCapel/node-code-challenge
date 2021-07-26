@@ -12,7 +12,7 @@ import { MAX_INSTRUCTIONS } from '../constants';
 
 const ParseError = (line: number, msg: string) => new Error(`Parse error in line ${line}: ${msg}`);
 
-const parseMapDimensions = (line: string) => {
+export const parseMapDimensions = (line: string) => {
   const values = line.split(' ');
   if (values.length !== 2) throw ParseError(0, 'Wrong map dimensions definition');
 
@@ -21,7 +21,7 @@ const parseMapDimensions = (line: string) => {
   return mapDimensions;
 };
 
-const parseRobot = (line: string, lineNumber: number) => {
+export const parseRobot = (line: string, lineNumber: number) => {
   const values = line.split(' ');
   if (values.length !== 3) throw ParseError(lineNumber, 'Wrong robot definition');
 
@@ -34,7 +34,7 @@ const parseRobot = (line: string, lineNumber: number) => {
   return new Robot(initialPosition, initialDirectionParsed, defaultActions);
 };
 
-const parseActions = (line: string, lineNumber: number) => {
+export const parseActions = (line: string, lineNumber: number) => {
   if (line.length > MAX_INSTRUCTIONS) throw ParseError(lineNumber, 'Wrong actions definition. Maximum number of instructions reached');
 
   return line.split('').map((action) => {
